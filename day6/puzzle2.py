@@ -8,8 +8,8 @@ with open('input.txt', 'r') as f:
         line = line.strip()
         if not line:
             if not group:
-                continue
-            if len(group) == 1:
+                pass
+            elif len(group) == 1:
                 groups.append(group[0])
             else:
                 groups.append(reduce(lambda a, b: a.intersection(b), group[1:], group[0]))
