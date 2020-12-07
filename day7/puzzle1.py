@@ -13,16 +13,11 @@ with open('input.txt', 'r') as f:
         hierarchy[parent] = children
     
 
-def can_contain(parent, child, exclude=None):
-    if not exclude:
-        exclude = set()
-    children = hierarchy[parent] - exclude
+def can_contain(parent, child):
+    children = hierarchy[parent]
     if child in children:
         return True
-    for new_parent in children:
-        if can_contain(new_parent, child, exclude | children):
-            return True
-    return False
+    return any(can_contain(p, child) for p in children)
     
 
 print(sum(can_contain(bag, 'shiny gold bag') for bag in hierarchy))
