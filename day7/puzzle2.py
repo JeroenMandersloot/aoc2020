@@ -6,8 +6,7 @@ pattern = r'(.+)s contain (?:(?:(\d+) ([^,.]*?)s?(?:, )?)+.$)?'
 hierarchy = dict()
 with open('input.txt', 'r') as f:
     for line in f.readlines():
-        line = line.strip()
-        match = regex.search(pattern, line)
+        match = regex.search(pattern, line.strip())
         parent = match.captures(1)[0]
         hierarchy[parent] = dict(zip(match.captures(3), map(int, match.captures(2))))
 
