@@ -8,7 +8,8 @@ with open('input.txt', 'r') as f:
     for line in f.readlines():
         match = regex.search(pattern, line.strip())
         parent = match.captures(1)[0]
-        hierarchy[parent] = set(match.captures(2))
+        children = set(match.captures(2))
+        hierarchy[parent] = children
     
 
 def can_contain(parent, child):
