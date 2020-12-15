@@ -1,0 +1,22 @@
+from collections import defaultdict
+from tqdm import tqdm
+
+l = [2,1,10,11,0,6]
+
+d = defaultdict(list)
+for i, c in enumerate(l):
+    d[c].append(i)
+
+a = 30000000
+n = l[-1]
+for i in tqdm(range(len(l), a), total=a):
+    if len(d[n]) == 1:
+        n = 0
+    else:
+        n = d[n][-1] - d[n][-2]
+    d[n].append(i)
+    
+print(max(map(len, d.values())))
+print(n)
+       
+    
