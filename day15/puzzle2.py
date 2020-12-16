@@ -16,7 +16,6 @@ for i in tqdm(range(len(l), a), total=a):
         n = d[n][-1] - d[n][-2]
     d[n].append(i)
     
-print(max(map(len, d.values())))
 print(n)
-       
+        
     
