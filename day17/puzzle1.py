@@ -6,9 +6,8 @@ num_cycles = 6
 with open('input.txt', 'r') as f:
 	initial = np.array([[c == '#' for c in line.strip()] for line in f.readlines()])
     
-dims = tuple(map(lambda d: d + num_cycles * 2, reversed((*initial.shape, 1))))
-grid = np.zeros(dims, dtype=bool)
-grid[num_cycles, num_cycles:-num_cycles, num_cycles:-num_cycles] = initial
+grid = np.zeros(tuple(reversed((*initial.shape, 1))), dtype=bool)
+grid[0] = initial
 
 
 
@@ -19,8 +18,11 @@ def get_neighbours(z, y, x, grid):
     
     
 for i in range(num_cycles):
+    g = np.zeros(tuple(map(lambda d: d+2, grid.shape)), dtype=bool)
+    g[1:-1, 1:-1, 1:-1] = np.copy(grid)
+    grid = np.copy(g)
     new_grid = np.copy(grid)
-    for z, y, x in product(*map(range, dims)):
+    for z, y, x in product(*map(range, grid.shape)):
         current = grid[z, y, x]
         num_active_neighbours = sum(get_neighbours(z, y, x, grid))
         is_active = current
