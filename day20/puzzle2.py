@@ -195,7 +195,8 @@ class Puzzle:
             if len(possibilities) == 1:
                 candidate = possibilities.pop()
                 self.place(y, x, candidate)
-                tiles.remove(tile)
+                if remove_after:
+                    tiles.remove(tile)
                 return candidate
             
             if len(possibilities) > 1:
