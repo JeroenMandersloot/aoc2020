@@ -147,7 +147,7 @@ class Puzzle:
         edges = [a for a, m in matches.items() if len(m) == 3]
         others = [a for a, m in matches.items() if len(m) == 4]
         
-        puzzle.place(0, 0, corners[0])
+        self.place(0, 0, corners[0])
     
         for y in range(1, self.height - 1):
             candidate = self.resolve(y, 0, edges)
